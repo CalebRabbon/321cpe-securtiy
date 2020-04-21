@@ -2,8 +2,7 @@ import string
 
 def main():
    # Open a file
-   #efile = open("./encrypted/caesar_easy_encrypted.txt", "r")
-   efile = open("./test.txt", "r")
+   efile = open("./encrypted/caesar_easy_encrypted.txt", "r")
    dfile = open("decrypted.txt", "w+")
 
    # Read the files contents
