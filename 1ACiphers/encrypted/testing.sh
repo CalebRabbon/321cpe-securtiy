@@ -1,21 +1,26 @@
 #!/bin/bash
 
-cat mono_easy_encrypt.txt
+cat mono_medium_encrypt.txt
 printf "\n\n1.) Translation\n\n"
-#                                1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6     1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6
-cat mono_easy_encrypt.txt | tr "[B,K,Z,S,F,I,L,G,X,J,N,R,T,W,U,D,A,O,Q,C,Y,M,H,P,E,V]" "[E,T,A,O,I,N,S,R,H,L,D,C,U,M,F,P,G,W,Y,B,V,K,X,J,Q,Z]"
+#                                  1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4     1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
+cat mono_medium_encrypt.txt | tr "[X,A,V,H,C,Y,S,J,E,D,I,G,F,O,R,P,A,M,B,T,W,N,L,Z]" "[E,T,A,O,I,N,S,R,H,L,D,C,U,M,F,P,G,W,Y,B,V,K,X,J]"
 
-# Noticed from the word AVOMT should be ABOUT Mapping V->B M->U
-# Noticed JEFFERION -> JEFFERSON. I->S
+# Trying to switch T and A
 printf "\n\n2.) Translation\n\n"
-cat mono_easy_encrypt.txt | tr "[B,K,Z,S,F,I,L,G,X,J,N,R,T,W,U,D,A,O,Q,C,Y,M,H,P,E,V]" "[E,T,A,O,S,N,S,R,H,L,D,C,U,U,F,P,G,W,Y,B,B,K,X,J,Q,Z]"
+cat mono_medium_encrypt.txt | tr "[X,A,V,H,C,Y,S,J,E,D,I,G,F,O,R,P,A,M,B,T,W,N,L,Z]" "[E,A,T,O,I,N,S,R,A,H,L,D,C,U,M,F,P,G,W,Y,B,V,K,X,J]"
 
-#THOUAS -> THOMAS. U->M, ANC -> AND C->D, SS -> IS, AMERIWA -> AMERICA W->C, LIBE-> LIVE B->V, THOUDH->THOUDH D->G GEST COAST->WEST COAST G->W
-printf "\n\n3.) Translation\n\n"
-#                                1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6     1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6
-cat mono_easy_encrypt.txt | tr "[B,K,Z,S,F,I,L,G,X,J,N,R,T,W,U,D,A,O,Q,C,Y,M,H,P,E,V]" "[E,T,A,O,S,N,I,R,H,L,G,D,M,U,F,P,W,C,Y,V,B,K,X,J,Q,Z]"
 
-#SIGNIFICANTLP->SIGNIFICANTLY P->Y ROYE->ROPE Y->P, From googling QIEGLER->ZIEGLER
+# Trying to switch X->A, A->T, V->E
 printf "\n\n3.) Translation\n\n"
-#                                1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6     1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6
-cat mono_easy_encrypt.txt | tr "[B,K,Z,S,F,I,L,G,X,J,N,R,T,W,U,D,A,O,Q,C,Y,M,H,P,E,V]" "[E,T,A,O,S,N,I,R,H,L,G,D,M,U,F,Y,W,C,P,V,B,K,X,J,Z,Q]"
+#                                  1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4     1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
+cat mono_medium_encrypt.txt | tr "[X,A,V,H,C,Y,S,J,E,D,I,G,F,O,R,P,A,M,B,T,W,N,L,Z]" "[A,T,R,I,O,T,N,S,R,H,L,D,C,U,M,F,P,G,W,Y,B,V,K,J]"
+
+
+printf "\n\n4.) Translation\n\n"
+#                                  1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4     1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
+cat mono_medium_encrypt.txt | tr "[X,A,V,H,C,Y,S,J,E,D,I,G,F,O,R,P,A,M,B,T,W,N,L,Z]" "[E,T,A,H,I,S,S,R,Y,L,D,C,U,W,F,P,T,C,Y,B,V,K,X,J]"
+
+#Encryption Key
+#[A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z]
+#[Z,Y,O,R,B,U,N,X,L,P,M,J,T,I,S,Q,V,G,F,K,W,C,A,H,D,E]
+#Letter that gets mapped to
