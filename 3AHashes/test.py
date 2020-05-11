@@ -3,7 +3,7 @@ import time
 
 # Takes two input strings and counts the number of identical characters at the same location
 def findSame(str1, str2):
-   print "Same chars for " + str1 + " and " + str2
+   print ("Same chars for " + str1 + " and " + str2)
    lst2 = []
    if(len(str1) != len(str2)):
       err = "Error: String length's differ:\n" + "\tstr1:" + str1 + "\n\tstr2:" + str2
@@ -11,9 +11,9 @@ def findSame(str1, str2):
    for i in range(0,len(str1)/2):
       if str1[i*2] == str2[i*2]:
          if str1[i*2+1] == str2[i*2+1]:
-            print "Bytes in common:" + str1[i*2] + str1[i*2+1]
+            print ("Bytes in common:" + str1[i*2] + str1[i*2+1])
             lst2.append(str1[i])
-   print "Number of bytes in common:" + str(len(lst2)) + "\n"
+   print ("Number of bytes in common:" + str(len(lst2)) + "\n")
    return len(lst2)
 
 
@@ -84,14 +84,14 @@ def findCollision(digestSize):
 
    hashVal = truncate(hashString(str(val)), digestSize)
 
-   print hashVal
+   print (hashVal)
 
    start = time.time()
    while addToDict(bdd, hashVal) != 1:
       #print bdd
       val += 1
       hashVal = truncate(hashString(str(val)), int(digestSize))
-      print hashVal
+      print (hashVal)
    #print "digest Size " + str(digestSize)
    end = time.time()
    duration = end - start

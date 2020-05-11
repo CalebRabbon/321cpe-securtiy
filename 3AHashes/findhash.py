@@ -3,7 +3,7 @@ import time
 
 # Takes two input strings and counts the number of identical characters at the same location
 def findSame(str1, str2):
-   print "Same chars for " + str1 + " and " + str2
+   print ("Same chars for " + str1 + " and " + str2)
    lst2 = []
    if(len(str1) != len(str2)):
       err = "Error: String length's differ:\n" + "\tstr1:" + str1 + "\n\tstr2:" + str2
@@ -11,9 +11,9 @@ def findSame(str1, str2):
    for i in range(0,len(str1)/2):
       if str1[i*2] == str2[i*2]:
          if str1[i*2+1] == str2[i*2+1]:
-            print "Bytes in common:" + str1[i*2] + str1[i*2+1]
+            print ("Bytes in common:" + str1[i*2] + str1[i*2+1])
             lst2.append(str1[i])
-   print "Number of bytes in common:" + str(len(lst2)) + "\n"
+   print ("Number of bytes in common:" + str(len(lst2)) + "\n")
    return len(lst2)
 
 
@@ -50,10 +50,10 @@ def addToDict(d, val):
    found = d.get(val,0)
 
    if found == 1:
-      #print "Found the value"
+      #print ("Found the value")
       return 1
    else:
-      #print "not found"
+      #print ("not found")
       d[val] = 1
       return 0
    return 0
@@ -76,29 +76,31 @@ def hamming():
    findSame(val1, val2)
 
 # Finds the collision give a digest size. The lower the digest size the faster a collision will occur
-def findCollision(digestSize):
+def findCollision(digestSize, string):
    # Birthday dictionary
    bdd = {}
 
    val = 1
 
-   hashVal = truncate(hashString(str(val)), 8)
+   hashVal = truncate(hashString(str(val) + string), 8)
 
    start = time.time()
    while addToDict(bdd, hashVal) != 1:
-      #print bdd
+      #print (bdd)
       val += 1
-      hashVal = truncate(hashString(str(val)), int(digestSize))
-   #print "digest Size " + str(digestSize)
-   print val
+      hashVal = truncate(hashString(str(val) + string), int(digestSize))
+   #print ("digest Size " + str(digestSize))
+   print (val)
    end = time.time()
    duration = end - start
-   #print str(duration) # + " seconds"
+   #print (str(duration) # + " seconds")
 
 def main():
+   for i in range(8, 42, 2):
+      findCollision(i, "RANDOM STRING")
 # Loop from 8 to 40 in step of 2
-   for i in range(42, 52, 2):
-      findCollision(i)
+#   for i in range(42, 52, 2):
+#      findCollision(i)
 
 if __name__== "__main__":
    main()
