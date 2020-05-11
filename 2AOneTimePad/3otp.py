@@ -47,19 +47,19 @@ def main():
    if ofile.mode == "r":
       originalText = ofile.read()
 
-   print "Original Text:\n"
-   print originalText
+   print ("Original Text:\n")
+   #print originalText
 
    ranString = createRanString(len(originalText))
    encrypt = xor(originalText,ranString)
 
-   print "Encrypted Text:\n"
-   print encrypt
+   print ("Encrypted Text:\n")
+  # print encrypt
    efile.write(encrypt)
 
    decrypt = xor(encrypt, ranString)
-   print "\nDecrypted Text:\n"
-   print decrypt
+   print ("\nDecrypted Text:\n")
+  # print decrypt
    dfile.write(decrypt)
 
 if __name__== "__main__":
