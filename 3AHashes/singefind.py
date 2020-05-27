@@ -50,12 +50,16 @@ def main():
 
    wlist = words.words()
    print (len(wlist))
+   some = 0
 
    start = time.time()
    for word in wlist:
       if(len(word) < 11):
          if(len(word) > 5):
-            checkpw(word.encode('utf-8'),hBilbo)
+            some += 1
+            #checkpw(word.encode('utf-8'),hBilbo)
+
+   print (" some " + str(some))
    end = time.time()
    elapsed = end - start
    print ("Total Time to Crack Password")

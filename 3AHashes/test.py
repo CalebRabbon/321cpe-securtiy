@@ -77,6 +77,8 @@ def hamming():
 
 # Finds the collision give a digest size. The lower the digest size the faster a collision will occur
 def findCollision(digestSize):
+   print ("Finding Collision for digest size " + str(digestSize))
+
    # Birthday dictionary
    bdd = {}
 
@@ -84,34 +86,18 @@ def findCollision(digestSize):
 
    hashVal = truncate(hashString(str(val)), digestSize)
 
-   print (hashVal)
-
    start = time.time()
    while addToDict(bdd, hashVal) != 1:
       #print bdd
       val += 1
       hashVal = truncate(hashString(str(val)), int(digestSize))
-      print (hashVal)
-   #print "digest Size " + str(digestSize)
+   print ("Input till collision " + str(val))
    end = time.time()
    duration = end - start
-   #print str(duration) # + " seconds"
+   print (str(duration) + " seconds")
 
 def main():
    findCollision(18)
-
-#   val = 329
-#   digestSize = 18
-#   hashVal = truncate(hashString(str(val)), int(digestSize))
-#   print hashVal
-#
-#   digestSize = 20
-#   hashVal = truncate(hashString(str(val)), int(digestSize))
-#   print hashVal
-#
-#   digestSize = 22
-#   hashVal = truncate(hashString(str(val)), int(digestSize))
-#   print hashVal
 
 if __name__== "__main__":
    main()
