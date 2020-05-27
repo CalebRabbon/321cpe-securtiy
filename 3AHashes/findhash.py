@@ -1,5 +1,6 @@
 import hashlib
 import time
+import sys
 
 # Takes two input strings and counts the number of identical characters at the same location
 def findSame(str1, str2):
@@ -97,7 +98,7 @@ def findCollision(digestSize, string):
 
 def main():
    for i in range(8, 42, 2):
-      findCollision(i, "RANDOM STRING")
+      findCollision(i, sys.argv[1])
 # Loop from 8 to 40 in step of 2
 #   for i in range(42, 52, 2):
 #      findCollision(i)
