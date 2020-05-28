@@ -80,7 +80,7 @@ def main():
 #   # Encryption of the string
    key = get_random_bytes(16)
    out.write(key)
-   cipher = AES.new(key, AES.MODE_CBC)
+   cipher = AES.new(key, AES.MODE_ECB)
    encrypt = cipher.encrypt(data)
    cp.write(originalHeader)
    cp.write(encrypt)
