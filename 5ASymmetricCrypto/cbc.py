@@ -43,7 +43,6 @@ def createRandomByte():
    return value
 
 def pad(data):
-   data = "12345678901234567"
    length = len(data)
 
    # Check to see if you don't need to pad
