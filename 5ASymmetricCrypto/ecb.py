@@ -1,4 +1,4 @@
-# Encrypts a .bmp file with Cypher block chaining encryption
+# Encrypts a .bmp file with Electronic Code Book cipher
 
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
@@ -6,16 +6,22 @@ import string
 
 def pad(data):
    length = len(data)
-
-   # Check to see if you don't need to pad
-   if(length % 16 == 0):
-      return data
-
    # Each block of data is 16 bytes. To get the remaining pad bytes the below equation is used
    padBytes = 16 - (length % 16)
    for i in range(0, padBytes):
       data = data + chr(padBytes)
    return data
+
+def encryptData(data, cipher):
+   length = len(data)
+
+   # 16 bytes in a block. And length is given in bytes
+   numBlocks = length / 16
+
+   encryptedData = ""
+   for i in range(0, numBlocks):
+      encryptedData += cipher.encrypt(data[i*16:i*16+16])
+   return encryptedData
 
 def main():
    # Open a file
@@ -34,8 +40,8 @@ def main():
 
    # Encryption of the string
    key = get_random_bytes(16)
-   cipher = AES.new(key, AES.MODE_CBC)
-   encrypt = cipher.encrypt(data)
+   cipher = AES.new(key, AES.MODE_ECB)
+   encrypt = encryptData(data, cipher)
    cp.write(originalHeader)
    cp.write(encrypt)
 
