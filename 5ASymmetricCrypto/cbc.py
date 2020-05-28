@@ -1,3 +1,8 @@
+# Encrypts a .bmp file with Cypher block chaining encryption
+
+from base64 import b64encode
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
 import string
 import random
 
@@ -37,12 +42,27 @@ def createRandomByte():
 
    return value
 
+def pad(data):
+   data = "12345678901234567"
+   length = len(data)
+
+   # Check to see if you don't need to pad
+   if(length % 16 == 0):
+      return data
+
+   # Each block of data is 16 bytes. To get the remaining pad bytes the below equation is used
+   padBytes = 16 - (length % 16)
+   for i in range(0, padBytes):
+      data = data + chr(padBytes)
+   return data
+
 def main():
    # Open a file
    #ofile = open("./cp-logo.bmp", "r")
    ofile = open("./mustang.bmp", "r")
    o2file = open("./cp-logo.bmp", "r")
    cp = open("encryptCP.bmp", "w")
+   out = open("out.txt", "w")
    must = open("encryptMust.bmp", "w")
    combine = open("combine.bmp", "w")
 
@@ -53,28 +73,38 @@ def main():
    originalHeader = originalText[0:54]
    data = originalText[54:]
 
-   ranString = createRanString(len(data))
-   encrypt = xor(data,ranString)
+   # Padding the string
+   data = pad(data)
+#   print (data)
+   #out.write(data)
 
+#   # Encryption of the string
+   key = get_random_bytes(16)
+   out.write(key)
+   cipher = AES.new(key, AES.MODE_CBC)
+   encrypt = cipher.encrypt(data)
    cp.write(originalHeader)
    cp.write(encrypt)
 
-   # Read the files originalText2
-   if o2file.mode == "r":
-      originalText2 = o2file.read()
-
-   originalHeader2 = originalText2[0:54]
-   data2 = originalText2[54:]
-
-   encrypt2 = xor(data2,ranString)
-
-   must.write(originalHeader2)
-   must.write(encrypt2)
-
-   # XORING the two encrypted files
-   combine.write(originalHeader)
-   combineEncrypt = xor(encrypt, encrypt2)
-   combine.write(combineEncrypt)
-
+#   cp.write(originalHeader)
+#   cp.write(encrypt)
+#
+#   # Read the files originalText2
+#   if o2file.mode == "r":
+#      originalText2 = o2file.read()
+#
+#   originalHeader2 = originalText2[0:54]
+#   data2 = originalText2[54:]
+#
+#   encrypt2 = xor(data2,ranString)
+#
+#   must.write(originalHeader2)
+#   must.write(encrypt2)
+#
+#   # XORING the two encrypted files
+#   combine.write(originalHeader)
+#   combineEncrypt = xor(encrypt, encrypt2)
+#   combine.write(combineEncrypt)
+#
 if __name__== "__main__":
    main()
