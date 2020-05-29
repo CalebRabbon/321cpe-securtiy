@@ -26,7 +26,7 @@ def encryptData(data, cipher):
 def main():
    # Open a file
    ofile = open("./mustang.bmp", "r")
-   cp = open("encryptMust.bmp", "w")
+   cp = open("ecbencryptMust.bmp", "w")
 
    # Read the files originalText
    if ofile.mode == "r":
